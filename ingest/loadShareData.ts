@@ -2,8 +2,6 @@ const _ = require('lodash')
 const fs = require('fs')
 const path = require('path')
 
-const dataFolderPath = "../data"
-
 function getSimpleContributors (contributors) {
   const simpleContributors = _.map(contributors, (contributor) => {
     return {
@@ -35,14 +33,13 @@ function getSimpleShareRecords (shareObjects) {
 }
 
 async function main() {
-  const fs = require('fs')
   const dataFolderPath = process.env.DATADIR
   const files = fs.readdirSync(dataFolderPath)
   let totalRecords = 0
   _.map(files, (file) => {
     const fileName = path.join(dataFolderPath, file);
     console.log(`Reading data from filename: ${fileName}`)
-    const data=fs.readFileSync(fileName, 'utf8');
+    const data = fs.readFileSync(fileName, 'utf8');
     
     const shareObjects = JSON.parse(data);
     const simpleShareRecords = getSimpleShareRecords(shareObjects)

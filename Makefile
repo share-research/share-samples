@@ -30,6 +30,9 @@ install_js:
 load_share_data:
 	cd ingest && ts-node loadShareData.ts && cd ..
 
+load_share_data_from_dump:
+	cd ingest && ts-node loadShareDataFromDataDump.ts && cd ..
+
 fetch_share_data:
 	cd ingest && ts-node fetchShareData.ts && cd ..
 
