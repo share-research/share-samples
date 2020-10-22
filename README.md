@@ -1,11 +1,26 @@
 # share-load-samples
-This is an example project containing code to load data exported from the SHARE Registry into JSON format.  It assumes that data will be in the form within the most recent SHARE 2.0 schema.  Included is a fairly simple script that just demonstrates loading in JSON files, converting them to JSON objects within code, and then outputing a sample record to the command line.  When loading the JSON objects it also demonstrates to create simplified versions of the SHARE objects that only has relevant fields included.  This is intended to be a starting point only for someone to add additional code to then do something with the JSON objects loaded (or to copy the approach in other languages such as python or ruby).
+This is an example project containing code to load data exported from the SHARE Registry into JSON format.  It assumes that data will be in the form within the most recent SHARE 2.0 schema.  There are two scripts included:
+
+  ingest/fetchShareData.ts
+  ingest/loadShareData.ts
+
 
 # Starting from scratch
 
     make install
 
 It's worth running ``make install_js`` every now and then to make sure your packages are up-to-date.
+
+# Fetching SHARE Data
+This will query the SHARE registry and download results to the data directory in your project.  It puts results in a new timestamped folder with records chunked into 1000 records per file, and will attempt to download by source, then break them up by date range, and tags as available.  This will take some time to run, and currently does not load more records if there are more than 10000 results for a given date range plus tags per source.
+
+With sample json output from share run the following command to test:
+
+    make fetch_share_data
+
+# Loading and Using Existing SHARE Data
+
+Included is a fairly simple script that just demonstrates loading in JSON files that were retrieved by the fetch share data script or previously downloaded.  It loads them from files within a given directory and converts them to JSON objects within code, and then outputing a sample record to the command line.  When loading the JSON objects it also demonstrates to create simplified versions of the SHARE objects that only has relevant fields included.  This is intended to be a starting point only for someone to add additional code to then do something with the JSON objects loaded (or to copy the approach in other languages such as python or ruby).
 
 # Testing Loading Share Data
 
@@ -17,7 +32,9 @@ For example a load of EarthArXiv data from the folder could be:
 
     make load_share_data DATADIR=../data/EarthArXiv
 
-To load other data simply place them in a folder within the data path of the project and then change the data directory.  It should work for both absolute and relative paths.
+To load other data simply place them in a folder within the data path of the project and then change the data directory.  It should work for both absolute and relative paths.  For example if loading in files from the fetch you would insert the related timestamped directory such as:
+
+    make load_share_data DATADIR=../data/share_20201022095738/EarthArXiv
 
 # Sample Test Output
 Sample data is included in the project to enable running the sample command:
