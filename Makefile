@@ -26,8 +26,12 @@ endif
 install_js:
 	cd ingest && yarn && cd ..
 
+#This expects a command line argument defining the data directory such as make load_share_data DATADIR=../data/EarthArXiv
 load_share_data:
 	cd ingest && ts-node loadShareData.ts && cd ..
+
+fetch_share_data:
+	cd ingest && ts-node fetchShareData.ts && cd ..
 
 install: install_yarn install_js
 	echo 'Installing'
