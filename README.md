@@ -12,9 +12,9 @@ This is an example project containing code to load data exported from the SHARE 
 It's worth running ``make install_js`` every now and then to make sure your packages are up-to-date.
 
 # Fetching SHARE Data
-This will query the SHARE registry and download results to the data directory in your project.  It puts results in a new timestamped folder with records chunked into 1000 records per file, and will attempt to download by source, then break them up by date range, and tags as available.  This will take some time to run, and currently does not load more records if there are more than 10000 results for a given date range plus tags per source.
+This will query the SHARE registry and download results to the data directory in your project.  It puts results in a new timestamped folder with records chunked into 1000 records per file, and will attempt to download by source, then break them up by date range, and tags as available.  This will take some time to run, and currently does not load more records if there are more than 10000 results for a given date range plus tags per source.  This will fetch data from https://share.osf.io/api/v2/
 
-With sample json output from share run the following command to test:
+Run the following command to fetch share data:
 
     make fetch_share_data
 
