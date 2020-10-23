@@ -61,8 +61,11 @@ You should then see some sample that looks like this:
 
 cd ingest && ts-node loadShareDataFromDataDump.ts && cd ..
 Reading share records from filename: ../data/from_data_dump_samples/africarxiv/africarxiv.json-list_5
+
 Processing 587 share records
-Sample Record: {
+
+Sample Record: 
+{
   "id": "_:ba357bb3-3edd-4c70-a582-bd53fd02be74",
   "title": "test",
   "description": "jbvouabvoboaefojlnlenfe",
@@ -109,10 +112,10 @@ Sample Record: {
         "isaffiliatedwith"
       ]
     }
-  ],
+  ]
   ...
-  }
 }
+
 Loaded 587 Share Records from ../data/from_data_dump_samples/africarxiv/africarxiv.json-list_5
 
 # Sample Test Output From API
