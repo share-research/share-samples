@@ -57,7 +57,7 @@ Sample data is included in the project to enable running the sample command:
 
     make load_share_data DATADIR=../data/from_data_dump_samples/africarxiv
 
-You should then see some sample that looks like:
+You should then see some sample that looks like this:
 
 cd ingest && ts-node loadShareDataFromDataDump.ts && cd ..
 Reading share records from filename: ../data/from_data_dump_samples/africarxiv/africarxiv.json-list_5
