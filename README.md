@@ -66,54 +66,103 @@ Processing 587 share records
 
 Sample Record: 
 {
+
   "id": "_:ba357bb3-3edd-4c70-a582-bd53fd02be74",
+
   "title": "test",
+
   "description": "jbvouabvoboaefojlnlenfe",
+  
   "type": "preprint",
+
   "resourceIdentifiers": [
+
     "http://dx.doi.org/10.17605/OSF.IO/Y6TSV",
+
     "http://osf.io/y6tsv/"
+
   ],
+
   "persons": [
+
     {
+
       "id": "_:697a6b04-6b11-4026-bd6f-80cf5f2bb676",
+
       "given_name": "Rebecca",
+
       "family_name": "Rosenblatt",
+
       "identifiers": [
+
         "mailto:(email redacted)",
+
         "mailto:(email redacted)",
+
         "http://secure.gravatar.com/avatar/49eda97a447ff554d60e15fea9bf18e7?d=identicon",
+
         "http://orcid.org/0000-0003-2310-899X",
+
         "http://osf.io/45fsd/"
+
       ],
+
       "type": [
+
         "creator"
+
       ]
+
     }
+
   ],
+
   "subjects": [
+
     {
+
       "name": "Architecture",
+
       "uri": "https://api.osf.io/v2/taxonomies/584240d954be81056ceca9e5/"
+
     }
+
   ],
+
   "institutions": [
+
     {
+
       "id": "_:914a2485-038b-49a5-90ba-5f4de6d4eafc",
+
       "name": "University of Virginia",
+
       "type": [
+
         "isaffiliatedwith"
+
       ]
+
     },
+
     {
+
       "id": "_:04ef4a19-b131-4cf7-956b-51f460429831",
+
       "name": "Center For Open Science",
+
       "type": [
+
         "isaffiliatedwith"
+
       ]
+
     }
+
   ]
+
   ...
+  
 }
 
 Loaded 587 Share Records from ../data/from_data_dump_samples/africarxiv/africarxiv.json-list_5
