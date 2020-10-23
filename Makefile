@@ -27,8 +27,11 @@ install_js:
 	cd ingest && yarn && cd ..
 
 #This expects a command line argument defining the data directory such as make load_share_data DATADIR=../data/EarthArXiv
-load_share_data:
-	cd ingest && ts-node loadShareData.ts && cd ..
+load_share_data_fetched_from_api:
+	cd ingest && ts-node loadShareDataFetchedFromAPI.ts && cd ..
+
+load_share_data_from_dump:
+	cd ingest && ts-node loadShareDataFromDataDump.ts && cd ..
 
 fetch_share_data:
 	cd ingest && ts-node fetchShareData.ts && cd ..

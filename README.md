@@ -1,9 +1,9 @@
 # share-load-samples
-This is an example project containing code to load data exported from the SHARE Registry into JSON format.  It assumes that data will be in the form within the most recent SHARE 2.0 schema.  There are two scripts included:
+This is an example project containing code to load data exported from the SHARE Registry into JSON format.  It assumes that data will be in the form within the most recent SHARE 2.0 schema.  There are three scripts included:
 
   ingest/fetchShareData.ts
-  ingest/loadShareData.ts
-
+  ingest/loadShareDataFetchedFromAPI.ts
+  ingest/loadShareDataFromDataDump.ts
 
 # Starting from scratch
 
@@ -18,33 +18,369 @@ Run the following command to fetch share data:
 
     make fetch_share_data
 
-# Loading and Using Existing SHARE Data
+# Loading and Using Existing SHARE Data from the API
 
-Included is a fairly simple script that just demonstrates loading in JSON files that were retrieved by the fetch share data script or previously downloaded.  It loads them from files within a given directory and converts them to JSON objects within code, and then outputing a sample record to the command line.  When loading the JSON objects it also demonstrates to create simplified versions of the SHARE objects that only has relevant fields included.  This is intended to be a starting point only for someone to add additional code to then do something with the JSON objects loaded (or to copy the approach in other languages such as python or ruby).
+Included is a fairly simple script that demonstrates loading in JSON files that were retrieved by the fetch share data script or previously downloaded.  It loads them from files within a given directory and converts them to JSON objects within code, and then outputing a sample record to the command line.  When loading the JSON objects it also demonstrates to create simplified versions of the SHARE objects that only has relevant fields included.  This is intended to be a starting point only for someone to add additional code to then do something with the JSON objects loaded (or to copy the approach in other languages such as python or ruby).
 
-# Testing Loading Share Data
+# Loading and Using Existing SHARE Data from a normalized data dump
+
+Also, included is a script that similarly demonstrates loading and transforming normalized metadata from share into a simple metadata object
+
+# Testing Loading Share Data from the data dump
 
 With sample json output from share run the following command to test:
 
-    make load_share_data DATADIR=<your_directory>
+    make load_share_data_from_dump DATADIR=<your_directory>
+
+For example a load of africarxiv data from the folder could be:
+
+    make load_share_data_from_dump DATADIR=../data/from_data_dump_samples/africarxiv
+
+To load other data simply place them in a folder within the data path of the project and then change the data directory.  It should work for both absolute and relative paths.
+
+# Testing Loading Share Data Fetched from the API
+
+With sample json output from share run the following command to test:
+
+    make load_share_data_fetched_from_api DATADIR=<your_directory>
 
 For example a load of EarthArXiv data from the folder could be:
 
-    make load_share_data DATADIR=../data/EarthArXiv
+    make load_share_data_fetched_from_api DATADIR=../data/from_api_samples/EarthArXiv
 
 To load other data simply place them in a folder within the data path of the project and then change the data directory.  It should work for both absolute and relative paths.  For example if loading in files from the fetch you would insert the related timestamped directory such as:
 
-    make load_share_data DATADIR=../data/share_20201022095738/EarthArXiv
+    make load_share_data_fetched_from_api DATADIR=../data/share_20201022095738/EarthArXiv
 
-# Sample Test Output
+# Sample Test Output from Data Dump
 Sample data is included in the project to enable running the sample command:
 
-    make load_share_data DATADIR=../data/EarthArXiv
+    make load_share_data DATADIR=../data/from_data_dump_samples/africarxiv
+
+You should then see some sample that looks like:
+
+cd ingest && ts-node loadShareDataFromDataDump.ts && cd ..
+Reading share records from filename: ../data/from_data_dump_samples/africarxiv/africarxiv.json-list_5
+Processing 587 share records
+Sample Record: {
+  "id": "_:ba357bb3-3edd-4c70-a582-bd53fd02be74",
+  "title": "test",
+  "description": "jbvouabvoboaefojlnlenfe",
+  "type": "preprint",
+  "resourceIdentifiers": [
+    "http://dx.doi.org/10.17605/OSF.IO/Y6TSV",
+    "http://osf.io/y6tsv/"
+  ],
+  "persons": [
+    {
+      "id": "_:697a6b04-6b11-4026-bd6f-80cf5f2bb676",
+      "given_name": "Rebecca",
+      "family_name": "Rosenblatt",
+      "identifiers": [
+        "mailto:(email redacted)",
+        "mailto:(email redacted)",
+        "http://secure.gravatar.com/avatar/49eda97a447ff554d60e15fea9bf18e7?d=identicon",
+        "http://orcid.org/0000-0003-2310-899X",
+        "http://osf.io/45fsd/"
+      ],
+      "type": [
+        "creator"
+      ]
+    }
+  ],
+  "subjects": [
+    {
+      "name": "Architecture",
+      "uri": "https://api.osf.io/v2/taxonomies/584240d954be81056ceca9e5/"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "_:914a2485-038b-49a5-90ba-5f4de6d4eafc",
+      "name": "University of Virginia",
+      "type": [
+        "isaffiliatedwith"
+      ]
+    },
+    {
+      "id": "_:04ef4a19-b131-4cf7-956b-51f460429831",
+      "name": "Center For Open Science",
+      "type": [
+        "isaffiliatedwith"
+      ]
+    }
+  ],
+  "rawMetadata": {
+    "person": [
+      {
+        "@id": "_:697a6b04-6b11-4026-bd6f-80cf5f2bb676",
+        "@type": "person",
+        "given_name": "Rebecca",
+        "family_name": "Rosenblatt",
+        "identifiers": [
+          {
+            "@id": "_:19126b6f-e990-4e48-a1ef-e33fcb7ff84e",
+            "@type": "agentidentifier"
+          },
+          {
+            "@id": "_:6834a3c3-80b0-4d91-a211-0654220fa939",
+            "@type": "agentidentifier"
+          },
+          {
+            "@id": "_:d2b19273-fe9b-4529-b76d-2b22627c49ff",
+            "@type": "agentidentifier"
+          },
+          {
+            "@id": "_:efbf7f8a-cbe0-4739-8847-f32f29fa8594",
+            "@type": "agentidentifier"
+          },
+          {
+            "@id": "_:fd127ce8-ddc8-4652-83a7-d2c4f4797ada",
+            "@type": "agentidentifier"
+          }
+        ],
+        "work_relations": [
+          {
+            "@id": "_:c7694c77-f266-43ac-8bfd-aa114d938a4c",
+            "@type": "creator"
+          }
+        ],
+        "additional_name": "P.",
+        "outgoing_agent_relations": [
+          {
+            "@id": "_:48cfa4e7-ef62-40cb-92b8-c573daf10ea4",
+            "@type": "isaffiliatedwith"
+          },
+          {
+            "@id": "_:5ca99efa-42ed-4b26-9188-c89bef71487b",
+            "@type": "isaffiliatedwith"
+          }
+        ]
+      }
+    ],
+    "agentidentifier": [
+      {
+        "@id": "_:6834a3c3-80b0-4d91-a211-0654220fa939",
+        "uri": "mailto:(email redacted)",
+        "host": "cos.io",
+        "@type": "agentidentifier",
+        "agent": {
+          "@id": "_:697a6b04-6b11-4026-bd6f-80cf5f2bb676",
+          "@type": "person"
+        },
+        "scheme": "mailto"
+      },
+      {
+        "@id": "_:fd127ce8-ddc8-4652-83a7-d2c4f4797ada",
+        "uri": "http://osf.io/45fsd/",
+        "host": "osf.io",
+        "@type": "agentidentifier",
+        "agent": {
+          "@id": "_:697a6b04-6b11-4026-bd6f-80cf5f2bb676",
+          "@type": "person"
+        },
+        "scheme": "http"
+      },
+      {
+        "@id": "_:efbf7f8a-cbe0-4739-8847-f32f29fa8594",
+        "uri": "http://orcid.org/0000-0003-2310-899X",
+        "host": "orcid.org",
+        "@type": "agentidentifier",
+        "agent": {
+          "@id": "_:697a6b04-6b11-4026-bd6f-80cf5f2bb676",
+          "@type": "person"
+        },
+        "scheme": "http"
+      },
+      {
+        "@id": "_:19126b6f-e990-4e48-a1ef-e33fcb7ff84e",
+        "uri": "mailto:(email redacted)",
+        "host": "gmail.com",
+        "@type": "agentidentifier",
+        "agent": {
+          "@id": "_:697a6b04-6b11-4026-bd6f-80cf5f2bb676",
+          "@type": "person"
+        },
+        "scheme": "mailto"
+      },
+      {
+        "@id": "_:d2b19273-fe9b-4529-b76d-2b22627c49ff",
+        "uri": "http://secure.gravatar.com/avatar/49eda97a447ff554d60e15fea9bf18e7?d=identicon",
+        "host": "secure.gravatar.com",
+        "@type": "agentidentifier",
+        "agent": {
+          "@id": "_:697a6b04-6b11-4026-bd6f-80cf5f2bb676",
+          "@type": "person"
+        },
+        "scheme": "http"
+      }
+    ],
+    "preprint": [
+      {
+        "@id": "_:ba357bb3-3edd-4c70-a582-bd53fd02be74",
+        "@type": "preprint",
+        "title": "test",
+        "is_deleted": false,
+        "description": "jbvouabvoboaefojlnlenfe",
+        "identifiers": [
+          {
+            "@id": "_:2437e5f6-1f40-425e-b26c-cd656e644763",
+            "@type": "workidentifier"
+          },
+          {
+            "@id": "_:ecba1b70-2c18-43dc-88c2-d84956755c06",
+            "@type": "workidentifier"
+          }
+        ],
+        "date_updated": "2018-06-19T14:54:30.001589+00:00",
+        "date_published": "2018-06-19T14:54:28.913627+00:00",
+        "agent_relations": [
+          {
+            "@id": "_:c7694c77-f266-43ac-8bfd-aa114d938a4c",
+            "@type": "creator"
+          }
+        ],
+        "subject_relations": [
+          {
+            "@id": "_:1f80aeac-4b33-49a7-9674-b771fecc974f",
+            "@type": "throughsubjects"
+          }
+        ]
+      }
+    ],
+    "workidentifier": [
+      {
+        "@id": "_:2437e5f6-1f40-425e-b26c-cd656e644763",
+        "uri": "http://dx.doi.org/10.17605/OSF.IO/Y6TSV",
+        "host": "dx.doi.org",
+        "@type": "workidentifier",
+        "scheme": "http",
+        "creative_work": {
+          "@id": "_:ba357bb3-3edd-4c70-a582-bd53fd02be74",
+          "@type": "preprint"
+        }
+      },
+      {
+        "@id": "_:ecba1b70-2c18-43dc-88c2-d84956755c06",
+        "uri": "http://osf.io/y6tsv/",
+        "host": "osf.io",
+        "@type": "workidentifier",
+        "scheme": "http",
+        "creative_work": {
+          "@id": "_:ba357bb3-3edd-4c70-a582-bd53fd02be74",
+          "@type": "preprint"
+        }
+      }
+    ],
+    "institution": [
+      {
+        "@id": "_:914a2485-038b-49a5-90ba-5f4de6d4eafc",
+        "name": "University of Virginia",
+        "@type": "institution",
+        "incoming_agent_relations": [
+          {
+            "@id": "_:5ca99efa-42ed-4b26-9188-c89bef71487b",
+            "@type": "isaffiliatedwith"
+          }
+        ]
+      },
+      {
+        "@id": "_:04ef4a19-b131-4cf7-956b-51f460429831",
+        "name": "Center For Open Science",
+        "@type": "institution",
+        "incoming_agent_relations": [
+          {
+            "@id": "_:48cfa4e7-ef62-40cb-92b8-c573daf10ea4",
+            "@type": "isaffiliatedwith"
+          }
+        ]
+      }
+    ],
+    "isaffiliatedwith": [
+      {
+        "@id": "_:5ca99efa-42ed-4b26-9188-c89bef71487b",
+        "@type": "isaffiliatedwith",
+        "related": {
+          "@id": "_:914a2485-038b-49a5-90ba-5f4de6d4eafc",
+          "@type": "institution"
+        },
+        "subject": {
+          "@id": "_:697a6b04-6b11-4026-bd6f-80cf5f2bb676",
+          "@type": "person"
+        }
+      },
+      {
+        "@id": "_:48cfa4e7-ef62-40cb-92b8-c573daf10ea4",
+        "@type": "isaffiliatedwith",
+        "related": {
+          "@id": "_:04ef4a19-b131-4cf7-956b-51f460429831",
+          "@type": "institution"
+        },
+        "subject": {
+          "@id": "_:697a6b04-6b11-4026-bd6f-80cf5f2bb676",
+          "@type": "person"
+        }
+      }
+    ],
+    "subject": [
+      {
+        "@id": "_:e35906bb-7478-44c1-90f0-3dc1f7eebe75",
+        "uri": "https://api.osf.io/v2/taxonomies/584240d954be81056ceca9e5/",
+        "name": "Architecture",
+        "@type": "subject",
+        "is_deleted": false,
+        "work_relations": [
+          {
+            "@id": "_:1f80aeac-4b33-49a7-9674-b771fecc974f",
+            "@type": "throughsubjects"
+          }
+        ]
+      }
+    ],
+    "creator": [
+      {
+        "@id": "_:c7694c77-f266-43ac-8bfd-aa114d938a4c",
+        "@type": "creator",
+        "agent": {
+          "@id": "_:697a6b04-6b11-4026-bd6f-80cf5f2bb676",
+          "@type": "person"
+        },
+        "cited_as": "Rebecca Rosenblatt",
+        "order_cited": 0,
+        "creative_work": {
+          "@id": "_:ba357bb3-3edd-4c70-a582-bd53fd02be74",
+          "@type": "preprint"
+        }
+      }
+    ],
+    "throughsubjects": [
+      {
+        "@id": "_:1f80aeac-4b33-49a7-9674-b771fecc974f",
+        "@type": "throughsubjects",
+        "subject": {
+          "@id": "_:e35906bb-7478-44c1-90f0-3dc1f7eebe75",
+          "@type": "subject"
+        },
+        "is_deleted": false,
+        "creative_work": {
+          "@id": "_:ba357bb3-3edd-4c70-a582-bd53fd02be74",
+          "@type": "preprint"
+        }
+      }
+    ]
+  }
+}
+Loaded 587 Share Records from ../data/from_data_dump_samples/africarxiv/africarxiv.json-list_5
+
+# Sample Test Output From API
+Sample data is included in the project to enable running the sample command:
+
+    make load_share_data DATADIR=../data/from_api_samples/EarthArXiv
 
 You should then see some sample that looks like:
 
     cd ingest && ts-node loadShareData.ts && cd ..
-    Reading data from filename: /Users/rjohns14/git/share-samples/data/EarthArXiv/share_metadata_EarthArXiv_all_dates_from_index_0.json
+    Reading data from filename: /Users/rjohns14/git/share-samples/data/from_api_samples/EarthArXiv/share_metadata_EarthArXiv_all_dates_from_index_0.json
     Sample Record: {
     "id": "46150-D74-AC0",
     "title": "2-D numerical study of hydrated wedge dynamics from subduction to post-collisional phases",
@@ -115,8 +451,8 @@ You should then see some sample that looks like:
         }
     ]
     }
-    Loaded 1000 Share Records from /Users/rjohns14/git/share-samples/data/EarthArXiv/share_metadata_EarthArXiv_all_dates_from_index_0.json
-    Reading data from filename: /Users/rjohns14/git/share-samples/data/EarthArXiv/share_metadata_EarthArXiv_all_dates_from_index_1000.json
+    Loaded 1000 Share Records from /Users/rjohns14/git/share-samples/data/from_api_samples/EarthArXiv/share_metadata_EarthArXiv_all_dates_from_index_0.json
+    Reading data from filename: /Users/rjohns14/git/share-samples/data/from_api_samples/EarthArXiv/share_metadata_EarthArXiv_all_dates_from_index_1000.json
     Sample Record: {
     "id": "4614B-B36-9FB",
     "title": "Growing Forced Bars Determine Nonideal Estuary Planform",
@@ -199,5 +535,5 @@ You should then see some sample that looks like:
         }
     ]
     }
-    Loaded 866 Share Records from /Users/rjohns14/git/share-samples/data/EarthArXiv/share_metadata_EarthArXiv_all_dates_from_index_1000.json
-    Loaded 1866 total records from /Users/rjohns14/git/share-samples/data/EarthArXiv
+    Loaded 866 Share Records from /Users/rjohns14/git/share-samples/data/from_api_samples/EarthArXiv/share_metadata_EarthArXiv_all_dates_from_index_1000.json
+    Loaded 1866 total records from /Users/rjohns14/git/share-samples/data/from_api_samples/EarthArXiv
