@@ -1,4 +1,4 @@
-const _ = require('lodash')
+import _ from 'lodash'
 const fs = require('fs')
 const path = require('path')
 
