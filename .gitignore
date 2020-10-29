@@ -9,7 +9,6 @@ scratch
 .favorites.json
 dist
 NOTES.md
-data/
 .env
 bak.env
 *.code-workspace
