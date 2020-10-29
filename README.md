@@ -18,6 +18,9 @@ Run the following command to fetch share data:
 
     make fetch_share_data
 
+# SHARE Schema
+A detailed SHARE description is contained in schema/share_schema.pdf.  The schema folder also contains a script that was used to generate that PDF file from the original pages within HTML on the SHARE site.
+
 # Loading and Using Existing SHARE Data from the API
 
 Included is a fairly simple script that demonstrates loading in JSON files that were retrieved by the fetch share data script or previously downloaded.  It loads them from files within a given directory and converts them to JSON objects within code, and then outputing a sample record to the command line.  When loading the JSON objects it also demonstrates to create simplified versions of the SHARE objects that only has relevant fields included.  This is intended to be a starting point only for someone to add additional code to then do something with the JSON objects loaded (or to copy the approach in other languages such as python or ruby).
